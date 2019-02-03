@@ -1,0 +1,43 @@
+1.model作成コマンド
+rails g model Task taskname:string term:date finish:boolean
+
+2.migrateを書き換える
+      t.string :taskname, null:false
+      t.boolean :finish, default: "false"
+
+3.初期値いれた
+task = Task.new(taskname:'task1’,term:'20190203')
+task.save
+task=Task.new(taskname:'task2',term:'20181231')
+task.save
+task=Task.new(taskname:'task3',term:'20121120')
+task.save
+
+4.routesいっぱい出た
+ec2-user:~/environment/lesson9/tasklist (master) $ rails routes
+                   Prefix Verb   URI Pattern                                                                              Controller#Action
+                    tasks GET    /tasks(.:format)                                                                         tasks#index
+                          POST   /tasks(.:format)                                                                         tasks#create
+                 new_task GET    /tasks/new(.:format)                                                                     tasks#new
+                edit_task GET    /tasks/:id/edit(.:format)                                                                tasks#edit
+                     task GET    /tasks/:id(.:format)                                                                     tasks#show
+                          PATCH  /tasks/:id(.:format)                                                                     tasks#update
+                          PUT    /tasks/:id(.:format)                                                                     tasks#update
+                          DELETE /tasks/:id(.:format)                                                                     tasks#destroy
+       rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
+rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
+       rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
+update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
+     rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
+
+5.controllerの生成
+rails g controller Tasks --no-helper --no-assets
+
+6.controllerみすったので削除、再度5
+rails destroy controller Tasks
+
+7.下記参考に対応、無駄なrouteを消した
+https://qiita.com/dyoshimitsu/items/55bb95fe20c6f503e835
+
+8. p/putsではまる
+pは表示されるが、putsは表示されない悩んだ

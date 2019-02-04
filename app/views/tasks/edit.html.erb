@@ -1,14 +1,5 @@
 <h1>id:<%= @task.id %>のメッセージ編集ページ</h1>
 
-<%= form_for(@task) do |f| %>
-    <%= f.label :content, 'タスク名：' %>
-    <%= f.text_field :content %><BR>
-      <%= f.label :term, '期限：' %>
-    <%= f.date_select :term %><BR>
-      <%= f.label :finish, '完了/未完了 ：' %>
-    <%= f.check_box :finish %>※完了したらチェックをつけること！<BR>
-    <BR>
-    <%= f.submit '更新' %>
-<% end %>
+<%= render 'form', task: @task %>
 
 <%= link_to '一覧に戻る', tasks_path %>

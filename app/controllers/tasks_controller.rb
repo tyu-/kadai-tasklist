@@ -19,7 +19,7 @@ class TasksController < ApplicationController
             redirect_to @task
         else
             flash.now[:danger] = 'タスクが追加されませんでした'
-            redner:new
+            render:new
         end
         
     end
@@ -50,7 +50,7 @@ class TasksController < ApplicationController
     
     private
     def task_params
-        params.require(:task).permit(:content,:term,:finish)
+        params.require(:task).permit(:content,:term,:finish,:status)
     end
     
 end

@@ -44,11 +44,19 @@ pは表示されるが、putsは表示されない悩んだ
 
 9.再提出を受けて
 contentカラムではなくtasknameというカラムを作成してしまった。
-修正の流れ
+tasks_controller.rbのtask_paramsをTasksControllerの外に記載してしまった
 
+修正の流れ
 9-1 rails db:rollback
  →tasksテーブルが消える
 9-2 20190203131835_create_tasks.rbを直接書き換える
  →taskname を contentに変更する
 9-3 rails db:migrate を実行
- 
+9-4 viewとcontrollerの taskname を contentにupdate
+9-5 tasks_controller.rbを修正し task_paramsをTasksController内に記載
+
+【質問】
+修正の流れは上記で問題ないでしょうか？
+規模が小さいからこれですみましたが、規模が大きい場合に今回のようなカラムの修正は
+どのような手順で行えばいいのでしょうか？
+Modelから作り直す必要がありますか？

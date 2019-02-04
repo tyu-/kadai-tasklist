@@ -2,6 +2,7 @@
 
 <p>タスク名：<%= @task.content %></p>
 <p>タスク期限：<%= @task.term %></p>
+<p>タスク状況：<%= @task.status %></p>
 <p>完了or未完了：
                     <% if @task.finish then%>
                     <%= p "完了" %>

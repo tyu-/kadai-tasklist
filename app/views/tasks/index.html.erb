@@ -1,12 +1,13 @@
 <h1>タスクリスト一覧</h1>
 
 <table border="1">
-    <tr><th>タスクNo.</th> <th>タスク名</th> <th>期限</th> <th>完了or未完了</th></tr>
+    <tr><th>タスクNo.</th> <th>タスク名</th> <th>期限</th> <th>タスク状況</th> <th>完了or未完了</th></tr>
         <% @tasks.each do |task|%>
             <tr>
                 <td><%= link_to task.id,task %></td>
                 <td><%= task.content %></td>
                 <td><%= task.term %></td>
+                <td><%= task.status %></td>
                 <td>
                     <% if task.finish then%>
                     <%= p "完了" %>

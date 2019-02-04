@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_02_03_131835) do
 
   create_table "tasks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "taskname", null: false
+    t.string "content", null: false
     t.date "term"
     t.boolean "finish", default: false
     t.datetime "created_at", null: false

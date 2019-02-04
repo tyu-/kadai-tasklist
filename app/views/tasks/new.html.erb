@@ -1,8 +1,8 @@
 <h1>タスク新規作成ページ</h1>
 
 <%= form_for(@task) do |f| %>
-    <%= f.label :taskname, 'タスク名：' %>
-    <%= f.text_field :taskname %><BR>
+    <%= f.label :content, 'タスク名：' %>
+    <%= f.text_field :content %><BR>
       <%= f.label :term, '期限：' %>
     <%= f.date_select :term %><BR>
     <BR>

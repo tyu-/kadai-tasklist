@@ -41,3 +41,14 @@ https://qiita.com/dyoshimitsu/items/55bb95fe20c6f503e835
 
 8. p/putsではまる
 pは表示されるが、putsは表示されない悩んだ
+
+9.再提出を受けて
+contentカラムではなくtasknameというカラムを作成してしまった。
+修正の流れ
+
+9-1 rails db:rollback
+ →tasksテーブルが消える
+9-2 20190203131835_create_tasks.rbを直接書き換える
+ →taskname を contentに変更する
+9-3 rails db:migrate を実行
+ 

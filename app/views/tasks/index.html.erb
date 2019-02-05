@@ -1,22 +1,32 @@
 <h1>タスクリスト一覧</h1>
 
-<table border="1">
-    <tr><th>タスクNo.</th> <th>タスク名</th> <th>期限</th> <th>タスク状況</th> <th>完了or未完了</th></tr>
-        <% @tasks.each do |task|%>
-            <tr>
-                <td><%= link_to task.id,task %></td>
-                <td><%= task.content %></td>
-                <td><%= task.term %></td>
-                <td><%= task.status %></td>
-                <td>
-                    <% if task.finish then%>
-                    <%= p "完了" %>
-                    <% else %>
-                    <%= p "未完了" %>
-                    <% end %>
-                </td>
-            </tr>
-        <% end %>
-</table>
-<BR>
-<%= link_to '新規タスクの追加', new_task_path %>
+<% if @tasks.any? %>
+<div class="row">
+  <div class="col-xs-8">
+  <table class="table table-striped">
+    <thead>
+      <tr><th>タスクNo.</th> <th>タスク名</th> <th>期限</th> <th>タスク状況</th> <th>完了or未完了</th></tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task|%>
+        <tr>
+          <td><%= link_to task.id,task %></td>
+          <td><%= task.content %></td>
+          <td><%= task.term %></td>
+          <td><%= task.status %></td>
+          <td>
+          <% if task.finish then%>
+          <%= p "完了" %>
+          <% else %>
+          <%= p "未完了" %>
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div><%= paginate @tasks %></div>
+  </div>
+</div>
+<% end %>

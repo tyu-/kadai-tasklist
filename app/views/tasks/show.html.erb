@@ -1,16 +1,36 @@
 <h1>id:<%= @task.id %>のメッセージ詳細ページ</h1>
 
-<p>タスク名：<%= @task.content %></p>
-<p>タスク期限：<%= @task.term %></p>
-<p>タスク状況：<%= @task.status %></p>
-<p>完了or未完了：
-                    <% if @task.finish then%>
-                    <%= p "完了" %>
-                    <% else %>
-                    <%= p "未完了" %>
-                    <% end %>
-</p>
-<BR>
-<%= link_to '一覧に戻る', tasks_path %>
-<%= link_to 'このメッセージを編集する', edit_task_path(@task) %>
-<%= link_to 'このメッセージを削除する', @task,method: :delete, data: {confirm:'本当に削除してよろしいですか？' } %>
+<div class="row">
+  <div class="col-xs-8">
+    <table class="table table-bordered">
+      <tr>
+        <th>タスク名</th>
+        <td><%= @task.content %></td>
+      </tr>
+    
+      <tr>
+        <th>タスク期限</th>
+        <td><%= @task.term %></td>
+      </tr>
+    
+      <tr>
+        <th>タスク状況</th>
+        <td><%= @task.status %></td>
+      </tr>
+    
+      <tr>
+        <th>完了or未完了</th>
+        <td>
+          <% if @task.finish then%>
+            <%= p "完了" %>
+          <% else %>
+            <%= p "未完了" %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= link_to 'このメッセージを編集する', edit_task_path(@task), class:'btn btn-default' %>
+<%= link_to 'このメッセージを削除する', @task,method: :delete, data: {confirm:'本当に削除してよろしいですか？' }, class:'btn btn-danger' %>

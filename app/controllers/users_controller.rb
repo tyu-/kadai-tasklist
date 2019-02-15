@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index,:show]
+  before_action :require_user_logged_in, only: [:show,:index,]
   
   
   def index
@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @tasks = @user.tasks.order('created_at DESC').page(params[:page])
+    
   end
 
   def new
@@ -19,7 +21,8 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:success] = 'ユーザを登録しました'
-      redirect_to @user
+      session[:user_id] = @user.id
+      redirect_to root_url
     else
       flash[:danger] = 'ユーザの登録に失敗しました'
       render :new

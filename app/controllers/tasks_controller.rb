@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
+  before_action :check_current_users_task, only: [:show,:edit,:destroy]
   
     def index
         @tasks = Task.all.page(params[:page]).per(5)
@@ -53,6 +54,13 @@ class TasksController < ApplicationController
     private
     def task_params
         params.require(:task).permit(:content,:term,:finish,:status)
+    end
+    
+    def check_current_users_task
+        if current_user.id != Task.find_by(id: params[:id]).user_id
+            flash[:danger] = 'ほかのユーザのタスクのCRUDは禁止です！'
+            redirect_to root_url
+        end
     end
     
 end

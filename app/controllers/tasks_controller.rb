@@ -1,13 +1,14 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :check_current_users_task, only: [:show,:edit,:destroy]
+  before_action :check_task_exist, only: [:show,:edit]
+  before_action :check_current_users_task, only: [:show,:edit,:destroy,:update]
   
     def index
         @tasks = Task.all.page(params[:page]).per(5)
     end
     
     def show
-        @task = Task.find(params[:id])
+      @task = Task.find(params[:id])
     end
     
     def new
@@ -28,7 +29,12 @@ class TasksController < ApplicationController
     end
     
     def edit
-        @task = Task.find(params[:id])
+      if Task.find_by(id: params[:id]) == nil
+        flash[:danger] = '存在しないTodo Listへのアクセスは禁止です！'
+        redirect_to root_url
+      end
+      
+      @task = Task.find(params[:id])
     end
     
     def update
@@ -57,10 +63,17 @@ class TasksController < ApplicationController
     end
     
     def check_current_users_task
-        if current_user.id != Task.find_by(id: params[:id]).user_id
-            flash[:danger] = 'ほかのユーザのタスクのCRUDは禁止です！'
-            redirect_to root_url
-        end
+      if current_user.id != Task.find_by(id: params[:id]).user_id
+        flash[:danger] = 'ほかのユーザタスクのCRUDは禁止です！'
+        redirect_to root_url
+      end
+    end
+    
+    def check_task_exist
+      if Task.find_by(id: params[:id]) == nil
+        flash[:danger] = '存在しないTodo Listへのアクセスは禁止です！'
+        redirect_to root_url
+      end
     end
     
 end

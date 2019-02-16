@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_action :require_user_logged_in
+  
     def index
         @tasks = Task.all.page(params[:page]).per(5)
     end
